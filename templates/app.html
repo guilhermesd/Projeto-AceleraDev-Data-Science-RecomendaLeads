@@ -10,17 +10,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
     <title>Recomenda leads</title>
 </head>
 
 <body class="bg-light">
     <div class="container">
-        <h2>Recomenda leads</h2>
+        <h2 class="text-center m-4">Recomenda leads</h2>
         <p class="lead">
-            Esta aplicação fornece um serviço automatizado que recomenda leads para um usuário dado sua atual lista de
+            Esta aplicação fornece um serviço automatizado, que recomenda leads para um usuário, dado sua atual lista de
             clientes (Portfólio).
             <br />
-            Para utilizá-lo faça o upload da lista de clientes no formulário abaixo em um arquivo .csv, contendo a
+            Para utilizá-lo, faça o upload da lista de clientes, no formulário abaixo em um arquivo <b><i>.csv</i></b>, contendo a
             coluna id.
         </p>
         <div class="row">
@@ -37,20 +40,34 @@
                             <input name="file" type="file" class="form-control-file" id="portifolio" placeholder="" />
                         </div>
                     </div>
-                    <button id="btnUpload" class="btn btn-primary btn-lg btn-block">Consultar</button>
+                    <button id="btnUpload" class="btn btn-primary btn-lg ">Consultar</button>
                      <hr/>
                      <h6>Portfólios de exemplo</h6>
-                     <a target='_blank' href='/download/estaticos_portfolio1.csv'>Portfólio 1 CSV</a>  
-                    <button portifolio ="1"  class="btnPortifolio btn btn-primary btn-lg btn-block">Consultar portfólio 1</button>
+                     <a target='_blank' href='/download/estaticos_portfolio1.csv'>Portfólio 1 CSV</a> <br/> 
+                    <button portifolio ="1"  class="btnPortifolio btn btn-primary btn-lg">Consultar portfólio 1</button>
                     <hr/>
-                    <a target='_blank' href='/download/estaticos_portfolio2.csv'>Portfólio 2 CSV</a>  
-                    <button portifolio ="2"  class="btnPortifolio btn btn-primary btn-lg btn-block">Consultar portfólio 2</button>
+                    <a target='_blank' href='/download/estaticos_portfolio2.csv'>Portfólio 2 CSV</a>  <br/>
+                    <button portifolio ="2"  class="btnPortifolio btn btn-primary btn-lg ">Consultar portfólio 2</button>
                     <hr/>
-                    <a target='_blank' href='/download/estaticos_portfolio3.csv'>Portfólio 3 CSV</a> 
-                    <button portifolio ="3"  class="btnPortifolio btn btn-primary btn-lg btn-block">Consultar portfólio 3</button>
+                    <a target='_blank' href='/download/estaticos_portfolio3.csv'>Portfólio 3 CSV</a> <br/>
+                    <button portifolio ="3"  class="btnPortifolio btn btn-primary btn-lg">Consultar portfólio 3</button>
                 </form>
             </div>
-        </div>
+        </div> 
+        <br/>
+        <br/>
+        <footer class="mastfoot mt-auto text-center">
+            <div class="inner">
+              <p>Projeto desenvolvido para o Acelera Dev Codenation - Data Science 2020,<br/>
+                 by <a href="https://www.linkedin.com/in/guilherme-sousa-domingos-2185393a/">Guilherme Domingos</a>.</p>
+              <p>
+                <a href="https://www.linkedin.com/in/guilherme-sousa-domingos-2185393a" target="_blank" class="fa fa-linkedin fa-2x p-1" style="text-decoration:none"></a>
+                <a href="https://github.com/guilhermesd/Projeto-AceleraDev-Data-Science-RecomendaLeads" target="_blank" class="fa fa-github fa-2x p-1" style="color:black; text-decoration:none"></a>
+                <a href="#" class="fa fa-youtube fa-2x p-1" target="_blank" style="color:red"></a>
+              </p>   
+
+            </div>
+        </footer>               
     </div>
 
     <div class="modal" tabindex="-1" role="dialog">
@@ -67,7 +84,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>       
     </div>
 
 

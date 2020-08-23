@@ -1,5 +1,5 @@
-# Recomensa Leads Versão 0.1.0  
-### link para o sistema https://recomenda-leads.herokuapp.com/ 
+# Recomenda Leads Versão 0.1.0  
+### link de acesso ao serviço https://recomenda-leads.herokuapp.com/
 
 ## Projeto AceleraDev Data Science  
 ## Objetivo  

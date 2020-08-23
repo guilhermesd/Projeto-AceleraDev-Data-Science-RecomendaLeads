@@ -1,7 +1,7 @@
 # Recomenda Leads Versão 0.1.0  
 ### link de acesso ao serviço https://recomenda-leads.herokuapp.com/
 
-## Projeto AceleraDev Data Science  
+## Esse serviço foi desenvolvido para o Projeto AceleraDev Data Science da Codenation
 ## Objetivo  
 O objetivo deste produto é fornecer um serviço automatizado que recomenda leads para um usuário dado sua atual lista de clientes (Portfólio).
 

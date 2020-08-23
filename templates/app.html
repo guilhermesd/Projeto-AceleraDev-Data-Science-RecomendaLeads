@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Recomenda leads</title>
+</head>
+
+<body class="bg-light">
+    <div class="container">
+        <h2>Recomenda leads</h2>
+        <p class="lead">
+            Esta aplicação fornece um serviço automatizado que recomenda leads para um usuário dado sua atual lista de
+            clientes (Portfólio).
+            <br />
+            Para utilizá-lo faça o upload da lista de clientes no formulário abaixo em um arquivo .csv, contendo a
+            coluna id.
+        </p>
+        <div class="row">
+            <div class="col-md-12 order-md-1">
+                <h4 class="mb-3">Portfólio</h4>
+                <div id='mensagem'>
+                </div>
+                <div id='leads'>
+                </div>
+                <form id="formUpload" class="needs-validation" onsubmit="return false">
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label for="firstName">CSV da lista de clientes</label>
+                            <input name="file" type="file" class="form-control-file" id="portifolio" placeholder="" />
+                        </div>
+                    </div>
+                    <button id="btnUpload" class="btn btn-primary btn-lg btn-block">Consultar</button>
+                     <hr/>
+                     <h6>Portfólios de exemplo</h6>
+                     <a target='_blank' href='/download/estaticos_portfolio1.csv'>Portfólio 1 CSV</a>  
+                    <button portifolio ="1"  class="btnPortifolio btn btn-primary btn-lg btn-block">Consultar portfólio 1</button>
+                    <hr/>
+                    <a target='_blank' href='/download/estaticos_portfolio2.csv'>Portfólio 2 CSV</a>  
+                    <button portifolio ="2"  class="btnPortifolio btn btn-primary btn-lg btn-block">Consultar portfólio 2</button>
+                    <hr/>
+                    <a target='_blank' href='/download/estaticos_portfolio3.csv'>Portfólio 3 CSV</a> 
+                    <button portifolio ="3"  class="btnPortifolio btn btn-primary btn-lg btn-block">Consultar portfólio 3</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <p>Aguarde. Esse processo pode demorar alguns segundos.</p>
+                        <div class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <script>
+        $(document).on("click", ".btnPortifolio", function () {
+            var idportifolio = $(this).attr("portifolio");
+            alert(idportifolio)
+            novaConsulta();
+            aguarde();
+            $.ajax({
+                url: '/portifolio',
+                data: {idportifolio: idportifolio},
+                type: 'POST',
+             }).done(function (fileOrMenssageerror) {
+                closeaguarde();
+                if(fileOrMenssageerror.indexOf('Erro') != -1){
+                    erro(fileOrMenssageerror);
+                    return false;
+                }
+                sucesso("Leads gerados com sucesso. acesse a lista no link abaixo.");
+                leads(fileOrMenssageerror);
+            }).fail(function () {
+                closeaguarde();
+                erro("Ocorreu um erro. Tente novamente");
+            });
+        });        
+        $(document).on("click", "#btnUpload", function () {
+            novaConsulta();
+            aguarde();
+            var form = $('#formUpload')[0]; // You need to use standard javascript object here
+            var formData = new FormData(form);
+            $.ajax({
+                url: '/upload',
+                data: formData,
+                type: 'POST',
+                contentType: false, // NEEDED, DON'T OMIT THIS (requires jQuery 1.6+)
+                processData: false, // NEEDED, DON'T OMIT THIS
+            }).done(function (fileOrMenssageerror) {
+                closeaguarde();
+                if(fileOrMenssageerror.indexOf('Erro') != -1){
+                    erro(fileOrMenssageerror);
+                    return false;
+                }
+                sucesso("Leads gerados com sucesso. acesse a lista no link abaixo.");
+                leads(fileOrMenssageerror);
+            }).fail(function () {
+                closeaguarde();
+                erro("Ocorreu um erro. Tente novamente");
+            });
+        });
+        function novaConsulta() {
+            $('#mensagem, #leads').html("");
+        }
+        function leads(file) {
+            $('#leads').html("<a target='_blank' href='/download/" + file + "'>Download dos leads gerados</a>");
+        }
+        function aguarde() {
+            $('.modal').modal({ backdrop: 'static', keyboard: false });
+        }
+        function closeaguarde() {
+            $('.modal').modal('hide');
+        }
+        function sucesso(msg) {
+            $('#mensagem').html('<div class="alert alert-success" role="alert">' + msg + '</div>');
+            window.scrollTo(0, 100);
+        }
+        function erro(msg) {
+            $('#mensagem').html('<div class="alert alert-danger" role="alert">' + msg + '</div>');
+            window.scrollTo(0, 100);
+        }        
+    </script>
+</body>
+
+</html>

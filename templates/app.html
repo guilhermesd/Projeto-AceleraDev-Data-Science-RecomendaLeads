@@ -18,7 +18,7 @@
 
 <body class="bg-light">
     <div class="container">
-        <h2 class="text-center m-4">Recomenda leads</h2>
+        <h2 class="text-center m-4">Recomenda leads Versão 0.1.0</h2>
         <p class="lead">
             Esta aplicação fornece um serviço automatizado, que recomenda leads para um usuário, dado sua atual lista de
             clientes (Portfólio).
@@ -116,7 +116,7 @@
                 leads(fileOrMenssageerror);
             }).fail(function () {
                 closeaguarde();
-                erro("Ocorreu um erro. Tente novamente");
+                erro("Ops... Ocorreu um erro :( ! Tente novamente");
             });
         });        
         $(document).on("click", "#btnUpload", function () {
@@ -140,7 +140,7 @@
                 leads(fileOrMenssageerror);
             }).fail(function () {
                 closeaguarde();
-                erro("Ocorreu um erro. Tente novamente");
+                erro("Ops... Ocorreu um erro :( ! Tente novamente");
             });
         });
         function novaConsulta() {
